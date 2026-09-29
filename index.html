@@ -176,6 +176,15 @@
   });
 
   lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+
+  // Header photo opens the same lightbox, full size
+  const pLogo = document.getElementById('p-logo');
+  pLogo.style.cursor = 'pointer';
+  pLogo.addEventListener('click', () => {
+    lightboxImg.src = pLogo.src;
+    lightboxCap.textContent = PROFILE.name || '';
+    lightbox.classList.add('open');
+  });
 </script>
 </body>
 </html>
