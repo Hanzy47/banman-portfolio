@@ -28,7 +28,7 @@ const PROFILE = {
 
   email: "Realhsheikh@gmail.com",
   location: "Leeds, UK & Bangkok, Thailand",
-  logo: "assets/profile-photo.png",
+  logo: "assets/banman-labs-logo.png",
   summary:
     "Started in IT and cybersecurity, got promoted fast to running the cybersecurity team and service desk. Automated most of the service desk's workflow, then automated most of my own workflow. Eventually left and started my own thing: built a personal AI assistant, still upgrading it with better hardware. Now I build SaaS and sell it to businesses as a service rather than as software; right now that's an eBay listing tool that speeds up how fast businesses can get inventory live, and a high-end backtesting platform for trading strategies. Python's my main language, but in an AI-assisted world the syntax barrier stopped being the hard part a while ago; the thinking transfers, the language is just whatever the job needs.",
   links: [
