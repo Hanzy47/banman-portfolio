@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software Portfolio</title>
+<link rel="icon" type="image/png" href="assets/banman-icon.png">
+<meta property="og:image" content="assets/banman-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="profile">
+    <img class="logo" id="p-logo" alt="Logo">
+    <div>
+      <h1 id="p-name"></h1>
+      <div class="title" id="p-title"></div>
+      <div class="meta" id="p-meta"></div>
+    </div>
+  </header>
+
+  <div class="summary" id="p-summary"></div>
+
+  <div class="skills" id="skills"></div>
+
+  <main id="projects"></main>
+
+  <section class="other-projects">
+    <h2>Other Projects</h2>
+    <ul id="other-projects-list"></ul>
+  </section>
+
+  <footer>Generated from projects.js — see README.md to add projects.</footer>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" src="" alt="">
+  <div class="cap" id="lightbox-cap"></div>
+</div>
+
+<script src="projects.js"></script>
+<script>
+  // ---- Header ----
+  document.getElementById('p-logo').src = PROFILE.logo || 'assets/banman-icon.png';
+  document.getElementById('p-name').textContent = PROFILE.name || 'Add your name in projects.js →';
+  document.getElementById('p-title').textContent = PROFILE.title;
+
+  const metaParts = [PROFILE.email, PROFILE.location].filter(Boolean);
+  const links = (PROFILE.links || []).map(l => `<a href="${l.url}">${l.label}</a>`);
+  document.getElementById('p-meta').innerHTML = metaParts.concat(links).join(' &nbsp;·&nbsp; ');
+
+  document.getElementById('p-summary').textContent = PROFILE.summary;
+
+  // ---- Skills ----
+  const skillsEl = document.getElementById('skills');
+  (PROFILE.skills || []).forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'skill-card';
+    card.innerHTML = `<div class="label">${s.label}</div><div class="detail">${s.detail}</div>`;
+    skillsEl.appendChild(card);
+  });
+
+  // ---- Projects ----
+  const container = document.getElementById('projects');
+
+  function renderFlow(flows) {
+    if (!flows || !flows.length) return '';
+    return flows.map(f => `
+      <div class="flow-group">
+        <div class="flow-name">${f.name}</div>
+        <div class="flow">
+          ${f.steps.map((s, i) => `
+            <div class="flow-step">${s}</div>
+            ${i < f.steps.length - 1 ? '<div class="flow-arrow"></div>' : ''}
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderGallery(allImages) {
+    // Concept/brand-art images are kept in projects.js for reference but not shown on the page —
+    // only real screenshots are displayed here.
+    const images = (allImages || []).filter(img => img.kind !== 'concept');
+    if (!images.length) return '';
+    return `
+      <h3>Screenshots &amp; visuals</h3>
+      <div class="gallery">
+        ${images.map((img, i) => `
+          <figure data-src="${img.src}" data-cap="${(img.caption || '').replace(/"/g, '&quot;')}" data-kind="${img.kind}">
+            <img src="${img.src}" alt="${img.caption || ''}" loading="lazy">
+            <figcaption>
+              <span class="kind-tag kind-${img.kind}">${img.kind === 'screenshot' ? 'Real screenshot' : 'Concept / brand art'}</span><br>
+              ${img.caption || ''}
+            </figcaption>
+          </figure>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  PROJECTS.forEach(p => {
+    const el = document.createElement('section');
+    el.className = 'project';
+    el.innerHTML = `
+      <div class="project-header">
+        ${p.logo ? `<img class="plogo" src="${p.logo}" alt="">` : ''}
+        <div class="htext">
+          <h2>${p.name}</h2>
+          <div class="tagline">${p.tagline}</div>
+        </div>
+        <div class="chevron">&#9660;</div>
+      </div>
+      <div class="project-body-wrap">
+        <div class="project-body-inner">
+          <div class="project-body">
+            <div class="row">
+              <span class="badge">${p.status}</span>
+              <span>${p.period}</span>
+            </div>
+            <div class="stack">${(p.stack || []).map(s => `<span class="tag">${s}</span>`).join('')}</div>
+
+            <h3>Problem</h3>
+            <p>${p.problem}</p>
+
+            <h3>What I built</h3>
+            <p>${p.solution}</p>
+
+            ${p.flows && p.flows.length ? `<h3>Flow</h3>${renderFlow(p.flows)}` : ''}
+
+            ${p.impact && p.impact.length ? `
+            <h3>Impact</h3>
+            <ul>${p.impact.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}
+
+            ${p.highlights && p.highlights.length ? `
+            <h3>Highlights</h3>
+            <ul>${p.highlights.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}
+
+            ${renderGallery(p.images)}
+          </div>
+        </div>
+      </div>
+    `;
+
+    el.querySelector('.project-header').addEventListener('click', () => {
+      el.classList.toggle('open');
+    });
+
+    container.appendChild(el);
+  });
+
+  // ---- Other Projects (compact list) ----
+  const otherList = document.getElementById('other-projects-list');
+  (OTHER_PROJECTS || []).forEach(p => {
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${p.name}</strong> — ${p.description}`;
+    otherList.appendChild(li);
+  });
+
+  // Open the first project by default
+  const first = container.querySelector('.project');
+  if (first) first.classList.add('open');
+
+  // ---- Lightbox ----
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCap = document.getElementById('lightbox-cap');
+
+  container.addEventListener('click', (e) => {
+    const fig = e.target.closest('figure[data-src]');
+    if (!fig) return;
+    lightboxImg.src = fig.dataset.src;
+    lightboxCap.textContent = fig.dataset.cap;
+    lightbox.classList.add('open');
+  });
+
+  lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+</script>
+</body>
+</html>
