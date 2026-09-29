@@ -152,9 +152,9 @@ const PROJECTS = [
     id: "banman-labs-commerce",
     name: "Banman Labs Commerce — Multi-Marketplace Dropshipping Platform",
     logo: "assets/banman-labs-logo.png",
-    tagline: "Ops platform that runs product sourcing, AI-drafted listings, and order fulfilment across eBay (UK) and Shopee/Lazada/Tokopedia/TikTok Shop (Indonesia) from one shared database — connected to the real eBay account, still working toward the first confirmed end-to-end sale.",
+    tagline: "Ops platform that runs product sourcing, AI-drafted listings, and order fulfilment across eBay (UK) and Shopee/Lazada/Tokopedia/TikTok Shop (Indonesia) from one shared database — connected to the real eBay account, still in progress, not final yet.",
     period: "2026",
-    status: "In progress — V1 built and connected to the real eBay account; no listing has sold end-to-end yet (the app's own dashboard tracks this and flags it unverified until it happens)",
+    status: "In progress — V1 built and connected to the real eBay account; still in progress, not final yet",
     stack: ["Python", "FastAPI", "SQLAlchemy + SQLite", "Playwright (stealth browser automation)", "Selenium (AI description/image automation)", "eBay Sell API + OAuth", "Server-rendered Jinja2 frontend"],
     problem:
       "Running dropship listings end-to-end across multiple marketplaces and two countries — sourcing, pricing, writing descriptions, processing photos, checking real fees, publishing, then tracking orders and fulfilment — doesn't scale as a manual, per-marketplace process, and anything that touches real money needs a human to actually decide, not a bot running unattended.",
