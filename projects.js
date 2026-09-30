@@ -143,8 +143,9 @@ const PROJECTS = [
       }
     ],
     images: [
-      { src: "assets/killzone-screenshot.png", kind: "screenshot", caption: "Killzone Gold Intelligence: live dashboard, real screenshot of the running tool." },
-      { src: "assets/killzone-fullpage.png", kind: "screenshot", caption: "Killzone dashboard, additional view." }
+      { src: "assets/hour-tightener-cards.png", kind: "screenshot", caption: "Hour Tightener HTML report: walk-forward hour-holdup table plus the A/B keep-hours verdict cards, each with real unseen-data profit and a beat-every-hour count." },
+      { src: "assets/hour-tightener-charts.png", kind: "screenshot", caption: "Hour Tightener graphs: running profit on unseen data for every-hour vs. the A/B hour selections, each test period side by side, and the real profit/loss by hour that decided them." },
+      { src: "assets/hour-tightener-console.png", kind: "screenshot", caption: "Hour Tightener console output: the per-hour walk-forward Score table (GOOD TO GO / TEST MORE / WEAK / WON'T WORK), the actual evidence behind which hours get written into a live strategy." }
     ],
     source: "Main PC: Desktop/Trader Bot (kings_gold_optimizer.py, hour_tightener.py); USB Backup/Nova 2/nova_ai"
   },
