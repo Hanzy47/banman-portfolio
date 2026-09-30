@@ -31,7 +31,7 @@
     <ul id="other-projects-list"></ul>
   </section>
 
-  <footer>Generated from projects.js — see README.md to add projects.</footer>
+  <footer>Generated from projects.js: see README.md to add projects.</footer>
 </div>
 
 <div class="lightbox" id="lightbox">
@@ -80,7 +80,7 @@
   }
 
   function renderGallery(allImages) {
-    // Concept/brand-art images are kept in projects.js for reference but not shown on the page —
+    // Concept/brand-art images are kept in projects.js for reference but not shown on the page;
     // only real screenshots are displayed here.
     const images = (allImages || []).filter(img => img.kind !== 'concept');
     if (!images.length) return '';
@@ -154,7 +154,7 @@
   const otherList = document.getElementById('other-projects-list');
   (OTHER_PROJECTS || []).forEach(p => {
     const li = document.createElement('li');
-    li.innerHTML = `<strong>${p.name}</strong> — ${p.description}`;
+    li.innerHTML = `<strong>${p.name}</strong>: ${p.description}`;
     otherList.appendChild(li);
   });
 
